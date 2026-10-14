@@ -1,0 +1,484 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: 'Actor', sans-serif;
+}
+
+:root {
+  --main-color: springgreen;
+  --bg-color-1: #222;
+  --bg-color-2: #111;
+  --card-bg: #2a2a2a;
+  --text-color-1: #eee;
+  --text-color-2: #fff;
+  --text-muted: #888;
+  --border-color: #333;
+
+  --big-fz: calc(22px + (32 - 22) * ((100vw - 300px) / (1500 - 300)));
+  --medium-fz: calc(16px + (22 - 16) * ((100vw - 300px) / (1500 - 300)));
+  --small-fz: calc(13px + (16 - 13) * ((100vw - 300px) / (1500 - 300)));
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  background: var(--bg-color-2);
+  color: var(--text-color-1);
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+.left-bar {
+  width: 300px;
+  min-width: 260px;
+  height: 100vh;
+  background: var(--bg-color-1);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+}
+
+.logo {
+  font-size: var(--big-fz);
+  font-weight: 700;
+  color: var(--main-color);
+  margin-bottom: 3.5rem;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: var(--text-color-1);
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.menu-title {
+  font-size: var(--medium-fz);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+
+.lists-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.lists-nav li {
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  font-size: var(--small-fz);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-color-1);
+  transition: background 0.2s ease;
+}
+
+.list-item-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lists-nav li:hover,
+.lists-nav li.active {
+  background: #333;
+  color: var(--main-color);
+}
+
+.delete-list-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.lists-nav li:hover .delete-list-btn {
+  opacity: 1;
+}
+
+.delete-list-btn:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.new-list-box {
+  position: relative;
+  height: 4rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.new-list-box:hover,
+.new-list-box:focus-within {
+  border-color: var(--main-color);
+  background: #2a2a2a;
+}
+
+.new-list-trigger {
+  padding: 0 1.2rem;
+  font-size: var(--small-fz);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+#new-list-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0 1.2rem;
+  color: #fff;
+  font-size: var(--small-fz);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.new-list-box:hover .new-list-trigger,
+.new-list-box:focus-within .new-list-trigger {
+  opacity: 0;
+}
+
+.new-list-box:hover #new-list-input,
+.new-list-box:focus-within #new-list-input {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.main-bar {
+  flex: 1;
+  height: 100vh;
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.main-header {
+  margin-bottom: 2rem;
+}
+
+.main-header h1 {
+  font-size: var(--big-fz);
+  margin-bottom: 0.5rem;
+}
+
+#tasks-count {
+  font-size: 1.4rem;
+  color: var(--text-muted);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.main-header h1 {
+  font-size: var(--big-fz);
+  margin-bottom: 0;
+}
+
+#sort-select {
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color-1);
+  color: var(--text-color-1);
+  font-size: 1.3rem;
+  outline: none;
+  cursor: pointer;
+}
+
+#sort-select:focus {
+  border-color: var(--main-color);
+}
+
+#todo-form {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+#todo-form input,
+#todo-form button {
+  padding: 1rem 1.4rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color-1);
+  color: var(--text-color-2);
+  font-size: 1.4rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#todo-form input:focus {
+  border-color: var(--main-color);
+}
+
+#todo-form input[type="text"]:first-child {
+  flex: 2;
+  min-width: 180px;
+}
+
+#todo-form input[type="date"],
+#todo-form input[type="text"]:nth-child(3) {
+  flex: 1;
+  min-width: 130px;
+}
+
+#todo-form button {
+  background: var(--main-color);
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+#todo-form button:hover {
+  opacity: 0.9;
+}
+
+#todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#todo-list li {
+  background: var(--card-bg);
+  padding: 1.2rem 1.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.check-btn {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 2px solid #666;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.check-btn:hover {
+  border-color: var(--main-color);
+}
+
+.task-title {
+  font-size: 1.5rem;
+  color: var(--text-color-1);
+}
+
+#todo-list li.completed .check-btn {
+  background: var(--main-color);
+  border-color: var(--main-color);
+}
+
+#todo-list li.completed .task-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.task-list-badge {
+  background: #253328;
+  color: var(--main-color);
+  border: 1px solid rgba(0, 255, 127, 0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 1.2rem;
+}
+
+.task-tag {
+  background: #333;
+  color: var(--main-color);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 1.2rem;
+}
+
+.task-date {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.right-bar {
+  width: 320px;
+  min-width: 280px;
+  height: 100vh;
+  background: var(--bg-color-1);
+  border-left: 1px solid var(--border-color);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.month {
+  font-size: var(--medium-fz);
+  color: var(--text-color-1);
+  font-weight: 600;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.month span {
+  color: var(--main-color);
+}
+
+.month-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.month-btn:hover {
+  background: #333;
+  color: var(--text-color-1);
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.days .day {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: var(--text-color-1);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.days .day:hover:not(.empty) {
+  background: #333;
+}
+
+.days .day.empty {
+  cursor: default;
+}
+
+.days .day.selected {
+  background: var(--main-color);
+  color: #111;
+  font-weight: bold;
+}
+
+.days .day.has-tasks::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: var(--main-color);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 4px;
+}
+
+.days .day.selected.has-tasks::after {
+  background: #111;
+}

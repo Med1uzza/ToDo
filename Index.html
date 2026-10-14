@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDoList</title>
+  
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Actor" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- left bar -->
+  <aside class="left-bar">
+    <a href="#" class="logo">To<span>DoList</span></a>
+    
+    <nav class="sidebar-menu">
+      <h2 class="menu-title">My Lists</h2>
+      
+      <ul class="lists-nav" id="lists-container">
+        <li class="list-item active" id="all-tasks-nav">
+          <i class="fa-solid fa-list-check"></i> Всі завдання
+        </li>
+      </ul>
+
+    <div class="new-list-box">
+        <div class="new-list-trigger">
+            <i class="fa-solid fa-plus"></i> New List
+        </div>
+        <input type="text" id="new-list-input" placeholder="Назва + Enter">
+    </div>
+    </nav>
+  </aside>
+
+  <!-- main bar -->
+  <main class="main-bar">
+    <header class="main-header">
+      <div class="header-top">
+        <h1 id="current-list-title">Всі завдання</h1>
+        <select id="sort-select">
+          <option value="none">Без сортування</option>
+          <option value="title">За назвою</option>
+          <option value="date">За датою</option>
+          <option value="tag">За тегом</option>
+        </select>
+      </div>
+      <p id="tasks-count">Виконано: 0 з 0</p>
+    </header>
+
+    <form id="todo-form">
+      <input type="text" id="todo-input" placeholder="Назва завдання" required>
+      <input type="date" id="todo-date">
+      <input type="text" id="todo-tag" placeholder="Тег">
+      <button type="submit">Додати</button>
+    </form>
+
+    <ul id="todo-list"></ul>
+  </main>
+
+  <!-- right bar -->
+  <aside class="right-bar">
+    <div class="calendar-header">
+      <button class="month-btn" id="prev-month" title="Попередній місяць">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <h2 class="month" id="month-title">Жовтень <span>2026</span></h2>
+      <button class="month-btn" id="next-month" title="Наступний місяць">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <div class="weekdays">
+      <span>Пн</span>
+      <span>Вт</span>
+      <span>Ср</span>
+      <span>Чт</span>
+      <span>Пт</span>
+      <span>Сб</span>
+      <span>Нд</span>
+    </div>
+
+    <div class="days" id="calendar-days"></div>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
