@@ -36,8 +36,7 @@ body {
 }
 
 .left-bar {
-  width: 300px;
-  min-width: 260px;
+  width: 20%;
   height: 100vh;
   background: var(--bg-color-1);
   padding: 2.5rem 2rem;
@@ -377,8 +376,7 @@ body {
 }
 
 .right-bar {
-  width: 320px;
-  min-width: 280px;
+  width: 20%;
   height: 100vh;
   background: var(--bg-color-1);
   border-left: 1px solid var(--border-color);
